@@ -31,13 +31,14 @@ function App() {
         toastOptions={{
           duration: 4000,
           style: {
-            background: '#0f172a',
+            background: '#0c0e18',
             color: '#fff',
-            borderRadius: '16px',
+            borderRadius: '18px',
             fontSize: '13px',
             padding: '12px 18px',
-            boxShadow: '0 10px 30px -5px rgba(15, 23, 42, 0.3)',
-            border: '1px solid #1e293b',
+            boxShadow: '0 20px 40px -15px rgba(12, 14, 24, 0.4)',
+            border: '1px solid #1e2238',
+            fontFamily: 'Outfit, sans-serif',
           },
           success: {
             iconTheme: {

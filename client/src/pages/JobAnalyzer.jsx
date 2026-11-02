@@ -15,7 +15,8 @@ import {
   Loader2,
   Building,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  FileCheck
 } from 'lucide-react';
 
 const JobAnalyzer = () => {
@@ -87,7 +88,7 @@ const JobAnalyzer = () => {
       setJobDescription('');
       setSelectedPdf(null);
 
-      // Navigate straight to skill gap analysis for instant wow factor!
+      // Navigate straight to skill gap analysis
       const newJobId = res.data.job.id;
       navigate(`/skill-gap/${newJobId}`);
     } catch (err) {
@@ -114,18 +115,18 @@ const JobAnalyzer = () => {
     <div className="space-y-8 font-sans">
       {/* Title */}
       <div>
-        <h2 className="text-xl font-bold text-slate-900 tracking-tight">AI Job Description Analyzer</h2>
-        <p className="text-xs text-slate-500">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight font-sans">AI Job Description Analyzer</h2>
+        <p className="text-xs text-slate-500 mt-0.5">
           Upload a PDF job posting or paste the requirements. Gemini 1.5 Pro extracts technical prerequisites into structured PostgreSQL data.
         </p>
       </div>
 
       {/* Main Analysis Form Card */}
-      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-premium">
+      <div className="bg-white p-7 sm:p-9 rounded-3xl border border-[#e8e9f2] shadow-premium">
         <form onSubmit={handleAnalyze} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold uppercase text-slate-700 mb-2">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 font-mono">
                 Job Title (Optional)
               </label>
               <input
@@ -133,29 +134,29 @@ const JobAnalyzer = () => {
                 value={jobTitle}
                 onChange={(e) => setJobTitle(e.target.value)}
                 placeholder="e.g. Full Stack Engineer, Cloud Architect"
-                className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                className="w-full px-4 py-3 rounded-2xl border border-[#e8e9f2] text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase text-slate-700 mb-2">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 font-mono">
                 Company Name (Optional)
               </label>
               <div className="relative">
-                <Building className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                <Building className="w-4 h-4 text-slate-400 absolute left-4 top-3.5" />
                 <input
                   type="text"
                   value={companyName}
                   onChange={(e) => setCompanyName(e.target.value)}
-                  placeholder="e.g. Google, Microsoft, Startup Inc."
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                  placeholder="e.g. Google, Microsoft, Stripe"
+                  className="w-full pl-11 pr-4 py-3 rounded-2xl border border-[#e8e9f2] text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all"
                 />
               </div>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-2">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 font-mono">
               Job Description Content *
             </label>
             <textarea
@@ -163,17 +164,17 @@ const JobAnalyzer = () => {
               value={jobDescription}
               onChange={(e) => setJobDescription(e.target.value)}
               placeholder="Paste the full job specification here, including responsibilities, required technical skills, qualifications, and preferred tools..."
-              className="w-full p-4 rounded-xl border border-slate-300 text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none leading-relaxed"
+              className="w-full p-4 rounded-2xl border border-[#e8e9f2] text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none leading-relaxed transition-all"
             />
           </div>
 
           {/* PDF File Dropzone / Selector */}
           <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-2">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 font-mono">
               Or Upload Job Description PDF (Max 5MB)
             </label>
-            <div className="flex items-center gap-4">
-              <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors">
+            <div className="flex flex-wrap items-center gap-4">
+              <label className="cursor-pointer inline-flex items-center gap-2 px-5 py-3 rounded-2xl border border-dashed border-purple-300 bg-purple-50/40 hover:bg-purple-100/50 text-xs font-bold text-brand-700 transition-colors">
                 <UploadCloud className="w-4 h-4 text-brand-600" />
                 <span>{selectedPdf ? selectedPdf.name : 'Select PDF Document'}</span>
                 <input
@@ -187,33 +188,33 @@ const JobAnalyzer = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedPdf(null)}
-                  className="text-xs text-rose-600 hover:underline"
+                  className="text-xs font-bold text-rose-600 hover:underline"
                 >
-                  Remove
+                  Remove attached file
                 </button>
               )}
             </div>
           </div>
 
-          <div className="pt-2 flex items-center justify-between">
-            <span className="text-xs text-slate-400 flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-500" />
-              <span>Extracted using Google Gemini 1.5 Pro</span>
+          <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <span className="text-xs text-slate-500 flex items-center gap-2 font-mono">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-500 animate-spin" style={{ animationDuration: '6s' }} />
+              <span>Parsed with Google Gemini 1.5 Pro</span>
             </span>
 
             <button
               type="submit"
               disabled={analyzing}
-              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-brand-600 to-indigo-600 hover:shadow-glow hover:scale-[1.02] transition-all disabled:opacity-50"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl font-bold text-sm text-white bg-gradient-to-r from-brand-600 via-purple-600 to-cyan-500 hover:shadow-glow hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
             >
               {analyzing ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin text-white" />
-                  <span>Gemini AI is parsing job requirements...</span>
+                  <span>Gemini AI is parsing requirements...</span>
                 </>
               ) : (
                 <>
-                  <Sparkles className="w-4 h-4 text-cyan-300" />
+                  <Sparkles className="w-4 h-4 text-cyan-200" />
                   <span>Analyze & Match Skills</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
@@ -225,7 +226,7 @@ const JobAnalyzer = () => {
 
       {/* Previously Analyzed Jobs List */}
       <div className="space-y-4">
-        <h3 className="text-base font-bold text-slate-900">Saved Job Analyses</h3>
+        <h3 className="text-lg font-extrabold text-slate-900 font-sans">Saved Job Analyses</h3>
 
         {loading ? (
           <CardSkeleton count={3} />
@@ -239,56 +240,56 @@ const JobAnalyzer = () => {
               return (
                 <div
                   key={job.id}
-                  className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-card hover:shadow-premium transition-all flex flex-col justify-between"
+                  className="bg-white p-6 rounded-3xl border border-[#e8e9f2] shadow-card hover:shadow-card-hover hover:border-purple-200 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
                 >
                   <div>
-                    <div className="flex items-start justify-between mb-2">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full">
+                    <div className="flex items-start justify-between mb-3">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-brand-600 bg-purple-50 border border-purple-100 px-3 py-1 rounded-full font-mono">
                         {job.source_type === 'pdf' ? 'PDF Upload' : 'Text Input'}
                       </span>
                       <button
                         onClick={() => handleDelete(job.id, job.job_title)}
-                        className="text-slate-400 hover:text-rose-600 transition-colors"
+                        className="text-slate-400 hover:text-rose-600 p-1 rounded-lg transition-colors"
                         title="Delete analysis"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
 
-                    <h4 className="text-base font-bold text-slate-900 leading-snug">{job.job_title}</h4>
+                    <h4 className="text-lg font-extrabold text-slate-900 font-sans leading-snug">{job.job_title}</h4>
                     <p className="text-xs text-slate-500 mb-3">{job.company_name || 'Target Employer'}</p>
 
                     {aiData.summary && (
-                      <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-4">
+                      <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-4 font-body">
                         {aiData.summary}
                       </p>
                     )}
 
-                    <div className="flex items-center gap-3 text-xs text-slate-600 mb-4">
-                      <span className="font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">
-                        {requiredCount} Required Skills
+                    <div className="flex items-center gap-2.5 text-xs text-slate-600 mb-4 font-mono">
+                      <span className="font-bold text-cyan-800 bg-cyan-50 border border-cyan-200 px-2.5 py-0.5 rounded-lg">
+                        {requiredCount} Required
                       </span>
                       {preferredCount > 0 && (
-                        <span className="font-semibold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded-md">
+                        <span className="font-bold text-purple-800 bg-purple-50 border border-purple-200 px-2.5 py-0.5 rounded-lg">
                           {preferredCount} Preferred
                         </span>
                       )}
                     </div>
                   </div>
 
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                     <Link
                       to={`/jobs/${job.id}`}
-                      className="text-xs font-semibold text-slate-600 hover:text-slate-900"
+                      className="text-xs font-bold text-slate-600 hover:text-brand-600 transition-colors"
                     >
                       View Details
                     </Link>
 
                     <Link
                       to={`/skill-gap/${job.id}`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold text-xs bg-gradient-to-r from-brand-600 to-indigo-600 text-white hover:shadow-glow transition-all"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-bold text-xs bg-gradient-to-r from-brand-600 to-purple-700 text-white hover:shadow-glow transition-all"
                     >
-                      <span>Check Skill Gap</span>
+                      <span>Check Gap</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>

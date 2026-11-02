@@ -6,14 +6,14 @@ export const CardSkeleton = ({ count = 3 }) => {
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}
-          className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm animate-pulse space-y-4"
+          className="bg-white p-6 rounded-3xl border border-[#e8e9f2] shadow-card animate-pulse space-y-4"
         >
           <div className="flex justify-between items-center">
-            <div className="h-4 bg-slate-200 rounded w-1/3"></div>
-            <div className="h-8 w-8 bg-slate-200 rounded-xl"></div>
+            <div className="h-4 bg-purple-100/70 rounded-lg w-1/3"></div>
+            <div className="h-9 w-9 bg-purple-100/70 rounded-2xl"></div>
           </div>
-          <div className="h-8 bg-slate-200 rounded w-1/2"></div>
-          <div className="h-3 bg-slate-200 rounded w-3/4"></div>
+          <div className="h-8 bg-slate-200/80 rounded-xl w-1/2"></div>
+          <div className="h-3 bg-slate-200/60 rounded-lg w-3/4"></div>
         </div>
       ))}
     </div>
@@ -22,19 +22,19 @@ export const CardSkeleton = ({ count = 3 }) => {
 
 export const TableSkeleton = ({ rows = 5 }) => {
   return (
-    <div className="w-full bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm">
-      <div className="p-4 border-b border-slate-100 flex gap-4">
-        <div className="h-5 bg-slate-200 rounded w-1/4 animate-pulse"></div>
+    <div className="w-full bg-white rounded-3xl border border-[#e8e9f2] overflow-hidden shadow-card">
+      <div className="p-5 border-b border-slate-100 flex gap-4">
+        <div className="h-5 bg-purple-100/70 rounded-lg w-1/4 animate-pulse"></div>
       </div>
-      <div className="divide-y divide-slate-100 p-4 space-y-4">
+      <div className="divide-y divide-slate-100 p-5 space-y-4">
         {Array.from({ length: rows }).map((_, i) => (
           <div key={i} className="flex items-center justify-between py-2 animate-pulse">
             <div className="flex items-center gap-3 w-1/3">
-              <div className="w-8 h-8 rounded-lg bg-slate-200"></div>
-              <div className="h-4 bg-slate-200 rounded w-full"></div>
+              <div className="w-9 h-9 rounded-xl bg-purple-100/70"></div>
+              <div className="h-4 bg-slate-200/80 rounded-lg w-full"></div>
             </div>
-            <div className="h-4 bg-slate-200 rounded w-20"></div>
-            <div className="h-4 bg-slate-200 rounded w-16"></div>
+            <div className="h-4 bg-slate-200/60 rounded-lg w-20"></div>
+            <div className="h-4 bg-slate-200/60 rounded-lg w-16"></div>
           </div>
         ))}
       </div>

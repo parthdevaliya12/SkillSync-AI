@@ -1,35 +1,39 @@
 import React from 'react';
-import { Target, Github, Twitter, Linkedin, Heart, Sparkles } from 'lucide-react';
+import { Compass, Github, Twitter, Linkedin, Heart, Sparkles, ShieldCheck, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-slate-950 text-slate-400 border-t border-slate-900 pt-16 pb-12">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-slate-900">
+    <footer className="bg-[#090b14] text-slate-400 border-t border-[#1e2238] pt-16 pb-12 font-sans relative overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-900/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-900/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-[#1e2238]">
           {/* Brand info */}
           <div className="md:col-span-1 space-y-4">
-            <Link to="/" className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-500 to-cyan-400 p-0.5 flex items-center justify-center shadow-glow">
-                <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                  <Target className="w-4 h-4 text-cyan-400" />
+            <Link to="/" className="flex items-center gap-3 group">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-purple-600 to-cyan-500 p-0.5 flex items-center justify-center shadow-glow">
+                <div className="w-full h-full bg-[#0c0e18] rounded-[10px] flex items-center justify-center">
+                  <Compass className="w-5 h-5 text-cyan-400 group-hover:rotate-45 transition-transform duration-500" />
                 </div>
               </div>
-              <span className="font-extrabold text-lg text-white font-sans">
+              <span className="font-extrabold text-xl text-white font-sans tracking-tight">
                 SkillSync<span className="text-cyan-400">.AI</span>
               </span>
             </Link>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Empowering students, freshers, and tech professionals to bridge skill gaps and land their dream jobs with intelligent AI career planning.
+            <p className="text-xs text-slate-400 leading-relaxed font-body">
+              Empowering students, freshers, and engineers to identify skill gaps against real job requirements with AI intelligence and deterministic scoring.
             </p>
-            <div className="flex items-center gap-3 text-slate-400">
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="p-2 bg-slate-900 rounded-lg hover:text-white hover:bg-slate-800 transition-colors">
+            <div className="flex items-center gap-3 text-slate-400 pt-1">
+              <a href="https://github.com" target="_blank" rel="noreferrer" className="p-2.5 bg-[#131626] border border-[#222744] rounded-xl hover:text-white hover:border-purple-500/50 hover:bg-purple-950/40 transition-all">
                 <Github className="w-4 h-4" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="p-2 bg-slate-900 rounded-lg hover:text-white hover:bg-slate-800 transition-colors">
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="p-2.5 bg-[#131626] border border-[#222744] rounded-xl hover:text-white hover:border-purple-500/50 hover:bg-purple-950/40 transition-all">
                 <Linkedin className="w-4 h-4" />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="p-2 bg-slate-900 rounded-lg hover:text-white hover:bg-slate-800 transition-colors">
+              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="p-2.5 bg-[#131626] border border-[#222744] rounded-xl hover:text-white hover:border-purple-500/50 hover:bg-purple-950/40 transition-all">
                 <Twitter className="w-4 h-4" />
               </a>
             </div>
@@ -37,38 +41,38 @@ const Footer = () => {
 
           {/* Product */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">Product</h4>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">Core Platform</h4>
             <ul className="space-y-2.5 text-xs">
-              <li><Link to="/job-analyzer" className="hover:text-cyan-400 transition-colors">Job Analyzer</Link></li>
+              <li><Link to="/job-analyzer" className="hover:text-cyan-400 transition-colors flex items-center gap-2"><Zap className="w-3 h-3 text-cyan-400" /> Job Analyzer</Link></li>
               <li><Link to="/skills" className="hover:text-cyan-400 transition-colors">Skill Portfolio</Link></li>
               <li><Link to="/skill-gap" className="hover:text-cyan-400 transition-colors">Gap Intelligence</Link></li>
               <li><Link to="/roadmaps" className="hover:text-cyan-400 transition-colors">AI Roadmaps</Link></li>
-              <li><Link to="/assistant" className="hover:text-cyan-400 transition-colors">Career Chatbot</Link></li>
+              <li><Link to="/assistant" className="hover:text-cyan-400 transition-colors">Career Assistant</Link></li>
             </ul>
           </div>
 
           {/* Architecture & Tech */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">Built With</h4>
-            <ul className="space-y-2.5 text-xs text-slate-400">
-              <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>React & Vite (JavaScript)</li>
-              <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-brand-400"></span>Node.js & Express</li>
-              <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>PostgreSQL (Neon Cloud)</li>
-              <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>Google Gemini 1.5 Pro</li>
-              <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-violet-400"></span>Tailwind CSS & Recharts</li>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">Tech Architecture</h4>
+            <ul className="space-y-2.5 text-xs text-slate-400 font-mono">
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-cyan-400"></span>React 18 & Vite</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-purple-400"></span>Node.js & Express</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-emerald-400"></span>PostgreSQL (Neon)</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-amber-400"></span>Google Gemini 1.5 Pro</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-pink-400"></span>Tailwind & Recharts</li>
             </ul>
           </div>
 
           {/* Standards & Security */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">Enterprise Grade</h4>
-            <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-xs space-y-2">
-              <div className="flex items-center gap-2 text-slate-300 font-semibold">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">Verified Integrity</h4>
+            <div className="p-4 rounded-2xl bg-[#131626] border border-[#222744] text-xs space-y-2.5 shadow-sm">
+              <div className="flex items-center gap-2 text-white font-bold">
+                <ShieldCheck className="w-4 h-4 text-cyan-400" />
                 <span>Deterministic Scoring</span>
               </div>
-              <p className="text-[11px] text-slate-400 leading-normal">
-                Skill gap percentages calculated via validated relational business logic, never hallucinated by LLMs.
+              <p className="text-[11px] text-slate-400 leading-relaxed font-body">
+                Readiness percentages are computed deterministically via relational PostgreSQL mathematical formulas, not random LLM estimates.
               </p>
             </div>
           </div>
@@ -76,9 +80,9 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p>© {new Date().getFullYear()} SkillSync AI. All rights reserved. Production Ready MCA Major Project.</p>
-          <p className="flex items-center gap-1">
-            Engineered with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> for ambitious developers.
+          <p>© {new Date().getFullYear()} SkillSync AI. All rights reserved.</p>
+          <p className="flex items-center gap-1.5">
+            Engineered with <Heart className="w-3.5 h-3.5 text-purple-400 fill-purple-400" /> for ambitious software developers.
           </p>
         </div>
       </div>
