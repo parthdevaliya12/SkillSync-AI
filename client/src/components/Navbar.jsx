@@ -15,7 +15,7 @@ import {
   Compass
 } from 'lucide-react';
 
-const Navbar = ({ onOpenSidebar, title = 'Dashboard' }) => {
+const Navbar = ({ onOpenSidebar, title = 'Dashboard', shortTitle }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [profileOpen, setProfileOpen] = useState(false);
@@ -44,34 +44,37 @@ const Navbar = ({ onOpenSidebar, title = 'Dashboard' }) => {
     { id: 3, title: 'Job Match Updated', desc: 'Readiness score improved to 82% for Full Stack Role.', time: '2h ago' },
   ];
 
+  const mobileDisplayTitle = shortTitle || (typeof title === 'string' ? title.split(' ')[0] : 'Dashboard');
+
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between h-20 px-6 sm:px-8 bg-white/90 backdrop-blur-md border-b border-[#e8e9f2] transition-all">
+    <header className="sticky top-0 z-30 flex items-center justify-between h-16 sm:h-20 px-4 sm:px-8 bg-white/95 backdrop-blur-md border-b border-[#e8e9f2] transition-all">
       {/* Left: Mobile Toggle & Page Title */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2.5 sm:gap-4 min-w-0 flex-1 mr-2">
         <button
           onClick={onOpenSidebar}
-          className="p-2.5 text-slate-600 rounded-xl hover:bg-purple-50/70 hover:text-brand-600 lg:hidden focus:outline-none transition-colors"
+          className="p-2 sm:p-2.5 text-slate-700 rounded-xl hover:bg-purple-50/80 hover:text-brand-600 lg:hidden focus:outline-none transition-all border border-purple-100/70 bg-white shadow-xs shrink-0 flex items-center justify-center active:scale-95"
           aria-label="Open navigation menu"
         >
           <Menu className="w-5 h-5" />
         </button>
 
-        <div>
-          <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 font-sans">
-            {title}
+        <div className="min-w-0">
+          <h1 className="text-base sm:text-xl lg:text-2xl font-extrabold tracking-tight text-slate-900 font-sans truncate leading-tight">
+            <span className="sm:hidden">{mobileDisplayTitle}</span>
+            <span className="hidden sm:inline">{title}</span>
           </h1>
-          <p className="hidden sm:block text-xs text-slate-500 font-medium mt-0.5">
+          <p className="hidden sm:block text-xs text-slate-500 font-medium mt-0.5 truncate">
             Welcome back, <span className="font-semibold text-brand-600">{user?.fullName?.split(' ')[0] || 'Developer'}</span> 👋
           </p>
         </div>
       </div>
 
       {/* Right Controls */}
-      <div className="flex items-center gap-3 sm:gap-4">
+      <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
         {/* Quick Action Button */}
         <Link
           to="/job-analyzer"
-          className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-brand-600 via-purple-600 to-cyan-500 rounded-xl shadow-sm hover:shadow-glow hover:scale-[1.02] active:scale-[0.98] transition-all"
+          className="hidden md:inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-brand-600 via-purple-600 to-cyan-500 rounded-xl shadow-sm hover:shadow-glow hover:scale-[1.02] active:scale-[0.98] transition-all"
         >
           <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
           <span>Analyze Job</span>
@@ -84,18 +87,18 @@ const Navbar = ({ onOpenSidebar, title = 'Dashboard' }) => {
               setNotificationsOpen(!notificationsOpen);
               setProfileOpen(false);
             }}
-            className="relative p-2.5 text-slate-500 hover:text-brand-600 hover:bg-purple-50/70 rounded-xl transition-all focus:outline-none"
+            className="relative p-2 sm:p-2.5 text-slate-500 hover:text-brand-600 hover:bg-purple-50/70 rounded-xl transition-all focus:outline-none border border-transparent hover:border-purple-100"
             aria-label="Notifications"
           >
             <Bell className="w-5 h-5" />
-            <span className="absolute top-2 right-2 w-2 h-2 bg-brand-600 rounded-full ring-2 ring-white"></span>
+            <span className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 w-2 h-2 bg-brand-600 rounded-full ring-2 ring-white"></span>
           </button>
 
           {notificationsOpen && (
-            <div className="absolute right-0 mt-3 w-80 sm:w-96 bg-white rounded-2xl shadow-premium border border-purple-100/80 py-3 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+            <div className="absolute right-0 mt-2 sm:mt-3 w-[calc(100vw-2rem)] max-w-sm sm:w-96 bg-white rounded-2xl shadow-premium border border-purple-100/80 py-3 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
               <div className="flex items-center justify-between px-4 pb-3 border-b border-slate-100">
                 <span className="text-sm font-bold text-slate-900">Notifications</span>
-                <span className="text-[11px] font-semibold text-brand-600 bg-brand-50 px-2.5 py-0.5 rounded-full border border-brand-100">
+                <span className="text-[11px] font-semibold text-brand-600 bg-brand-50 px-2.5 py-0.5 rounded-full border border-brand-100 font-mono">
                   3 unread
                 </span>
               </div>
@@ -108,8 +111,8 @@ const Navbar = ({ onOpenSidebar, title = 'Dashboard' }) => {
                     </div>
                     <div>
                       <p className="text-xs font-bold text-slate-800">{n.title}</p>
-                      <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{n.desc}</p>
-                      <span className="text-[10px] text-slate-400 mt-1 block">{n.time}</span>
+                      <p className="text-xs text-slate-500 mt-0.5 leading-relaxed font-body">{n.desc}</p>
+                      <span className="text-[10px] text-slate-400 mt-1 block font-mono">{n.time}</span>
                     </div>
                   </div>
                 ))}
@@ -134,24 +137,24 @@ const Navbar = ({ onOpenSidebar, title = 'Dashboard' }) => {
               setProfileOpen(!profileOpen);
               setNotificationsOpen(false);
             }}
-            className="flex items-center gap-2.5 p-1.5 pl-2 rounded-xl hover:bg-purple-50/60 transition-colors focus:outline-none"
+            className="flex items-center gap-1.5 sm:gap-2.5 p-1 sm:p-1.5 sm:pl-2 rounded-xl hover:bg-purple-50/60 transition-colors focus:outline-none border border-transparent hover:border-purple-100"
             aria-label="User menu"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-cyan-500 text-white font-bold text-xs flex items-center justify-center shadow-sm">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-600 via-purple-600 to-cyan-500 text-white font-extrabold text-xs flex items-center justify-center shadow-sm shrink-0">
               {user?.fullName?.charAt(0)?.toUpperCase() || 'U'}
             </div>
             <span className="hidden sm:inline-block text-xs font-bold text-slate-800 max-w-[110px] truncate">
               {user?.fullName || 'Profile'}
             </span>
-            <ChevronDown className="w-4 h-4 text-slate-400" />
+            <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
           </button>
 
           {profileOpen && (
-            <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-premium border border-purple-100/80 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+            <div className="absolute right-0 mt-2 sm:mt-3 w-64 max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-premium border border-purple-100/80 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
               <div className="px-4 py-3 border-b border-slate-100">
                 <p className="text-xs font-bold text-slate-900 truncate">{user?.fullName}</p>
                 <p className="text-[11px] text-slate-500 truncate">{user?.email}</p>
-                <div className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-50 text-cyan-700 border border-cyan-200 text-[10px] font-semibold">
+                <div className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-50 text-cyan-700 border border-cyan-200 text-[10px] font-semibold font-mono">
                   <CheckCircle className="w-3 h-3 text-cyan-600" />
                   <span>Pro Plan Active</span>
                 </div>

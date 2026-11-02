@@ -171,28 +171,25 @@ const AIAssistant = () => {
               >
                 {/* Avatar */}
                 <div
-                  className={`w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 ${
-                    isUser
-                      ? 'bg-slate-900 text-white shadow-sm'
-                      : 'bg-gradient-to-tr from-brand-600 to-cyan-500 text-white shadow-sm'
-                  }`}
+                  className={`w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 ${isUser
+                    ? 'bg-slate-900 text-white shadow-sm'
+                    : 'bg-gradient-to-tr from-brand-600 to-cyan-500 text-white shadow-sm'
+                    }`}
                 >
                   {isUser ? user?.fullName?.charAt(0) || 'U' : <Bot className="w-4 h-4" />}
                 </div>
 
                 {/* Bubble */}
                 <div
-                  className={`p-4 rounded-2xl text-xs sm:text-sm leading-relaxed ${
-                    isUser
-                      ? 'bg-gradient-to-r from-brand-600 to-purple-700 text-white shadow-glow'
-                      : 'bg-white border border-[#e8e9f2] text-slate-800 shadow-card whitespace-pre-wrap font-body'
-                  }`}
+                  className={`p-4 rounded-2xl text-xs sm:text-sm leading-relaxed ${isUser
+                    ? 'bg-gradient-to-r from-brand-600 to-purple-700 text-white shadow-glow'
+                    : 'bg-white border border-[#e8e9f2] text-slate-800 shadow-card whitespace-pre-wrap font-body'
+                    }`}
                 >
                   {msg.content}
                   <div
-                    className={`text-[10px] mt-2 font-mono ${
-                      isUser ? 'text-purple-200 text-right' : 'text-slate-400'
-                    }`}
+                    className={`text-[10px] mt-2 font-mono ${isUser ? 'text-purple-200 text-right' : 'text-slate-400'
+                      }`}
                   >
                     {new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </div>

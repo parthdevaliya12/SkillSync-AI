@@ -158,9 +158,8 @@ const JobDetails = () => {
                 className="px-3.5 py-2 rounded-xl bg-purple-50/40 border border-purple-100 text-xs font-semibold text-slate-800 flex items-center justify-between gap-3"
               >
                 <span>{s.skill_name}</span>
-                <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded font-mono ${
-                  s.importance === 'high' ? 'bg-rose-100 text-rose-700' : 'bg-slate-200 text-slate-700'
-                }`}>
+                <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded font-mono ${s.importance === 'high' ? 'bg-rose-100 text-rose-700' : 'bg-slate-200 text-slate-700'
+                  }`}>
                   {s.importance}
                 </span>
               </div>
@@ -203,7 +202,7 @@ const JobDetails = () => {
       {/* Tools, Tech & Keywords */}
       <div className="p-6 rounded-3xl bg-white border border-[#e8e9f2] shadow-card space-y-4">
         <h3 className="text-sm font-bold text-slate-900">Extracted Tools & Industry Keywords</h3>
-        
+
         <div className="flex flex-wrap gap-2">
           {aiData.toolsAndTechnologies?.map((tool, i) => (
             <span key={i} className="px-3 py-1.5 rounded-xl bg-purple-50 border border-purple-200/60 text-brand-700 text-xs font-semibold">

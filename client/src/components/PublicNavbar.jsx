@@ -8,16 +8,16 @@ const PublicNavbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#fbfbfe]/85 backdrop-blur-xl border-b border-purple-100/60 transition-all">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#fbfbfe]/90 backdrop-blur-xl border-b border-purple-100/60 transition-all">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-purple-600 to-cyan-500 p-0.5 shadow-glow flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+        <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group">
+          <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-purple-600 to-cyan-500 p-0.5 shadow-glow flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
             <div className="w-full h-full bg-[#0c0e18] rounded-[10px] flex items-center justify-center">
-              <Compass className="w-5 h-5 text-cyan-400 group-hover:rotate-45 transition-transform duration-500" />
+              <Compass className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 group-hover:rotate-45 transition-transform duration-500" />
             </div>
           </div>
-          <span className="font-extrabold text-xl tracking-tight text-slate-900 font-sans">
+          <span className="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 font-sans">
             SkillSync<span className="text-brand-600">.AI</span>
           </span>
         </Link>
@@ -63,10 +63,10 @@ const PublicNavbar = () => {
         {/* Mobile Hamburger */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-2 text-slate-700 hover:bg-purple-50 rounded-xl md:hidden transition-colors"
+          className="p-2 text-slate-700 hover:bg-purple-50 rounded-xl md:hidden transition-colors border border-purple-100/60 bg-white"
           aria-label="Toggle Menu"
         >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 

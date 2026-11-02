@@ -36,7 +36,7 @@ const StatCard = ({ title, value, subtitle, icon: Icon, color = 'brand', trend }
     <div className={`relative overflow-hidden bg-white p-6 rounded-3xl border border-[#e8e9f2] shadow-card hover:shadow-card-hover ${scheme.borderGlow} hover:-translate-y-1 transition-all duration-300 group`}>
       {/* Top subtle highlight */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-purple-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-      
+
       <div className="flex items-start justify-between gap-3">
         <div className="space-y-1">
           <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 font-sans">
@@ -47,9 +47,8 @@ const StatCard = ({ title, value, subtitle, icon: Icon, color = 'brand', trend }
               {value}
             </h3>
             {trend && (
-              <span className={`inline-flex items-center text-xs font-bold px-2 py-0.5 rounded-full ${
-                trend > 0 ? 'bg-cyan-50 text-cyan-700 border border-cyan-200' : 'bg-slate-100 text-slate-600'
-              }`}>
+              <span className={`inline-flex items-center text-xs font-bold px-2 py-0.5 rounded-full ${trend > 0 ? 'bg-cyan-50 text-cyan-700 border border-cyan-200' : 'bg-slate-100 text-slate-600'
+                }`}>
                 {trend > 0 ? <ArrowUpRight className="w-3.5 h-3.5 mr-0.5" /> : null}
                 {trend > 0 ? `+${trend}%` : `${trend}%`}
               </span>
