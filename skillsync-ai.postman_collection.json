@@ -1,0 +1,219 @@
+{
+  "info": {
+    "_postman_id": "skillsync-ai-api-v1",
+    "name": "SkillSync AI - API Collection",
+    "description": "Production REST API for SkillSync AI – AI-Powered Skill Gap Analyzer & Career Learning Planner",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Alex Sharma\",\n  \"email\": \"alex.developer@skillsync.ai\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] }
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"alex.developer@skillsync.ai\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/auth/profile", "host": ["{{baseUrl}}"], "path": ["auth", "profile"] }
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Alex Sharma\",\n  \"title\": \"Full Stack Engineer\",\n  \"bio\": \"Passionate developer scaling distributed systems\",\n  \"location\": \"Bangalore, India\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/profile", "host": ["{{baseUrl}}"], "path": ["auth", "profile"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Skills Management",
+      "item": [
+        {
+          "name": "Get Master Skills List",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/skills", "host": ["{{baseUrl}}"], "path": ["skills"] }
+          }
+        },
+        {
+          "name": "Get User Skills",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/skills/user", "host": ["{{baseUrl}}"], "path": ["skills", "user"] }
+          }
+        },
+        {
+          "name": "Add Skill to User",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"skillName\": \"TypeScript\",\n  \"category\": \"Programming Languages\",\n  \"proficiency\": \"intermediate\",\n  \"yearsExperience\": 2\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/skills/user", "host": ["{{baseUrl}}"], "path": ["skills", "user"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Job Analyzer",
+      "item": [
+        {
+          "name": "Analyze Job Description",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobTitle\": \"Senior Backend Engineer\",\n  \"companyName\": \"Stripe\",\n  \"jobDescription\": \"Seeking engineer skilled in JavaScript, React, Node.js, PostgreSQL, Docker, Redis and Kafka.\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/jobs/analyze", "host": ["{{baseUrl}}"], "path": ["jobs", "analyze"] }
+          }
+        },
+        {
+          "name": "Get User Jobs",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/jobs", "host": ["{{baseUrl}}"], "path": ["jobs"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Skill Gap",
+      "item": [
+        {
+          "name": "Calculate Skill Gap",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/skill-gap/:jobId", "host": ["{{baseUrl}}"], "path": ["skill-gap", ":jobId"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Roadmaps",
+      "item": [
+        {
+          "name": "Generate Roadmap",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobAnalysisId\": \"<JOB_ID>\",\n  \"totalWeeks\": 4,\n  \"hoursPerWeek\": 10\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/roadmaps/generate", "host": ["{{baseUrl}}"], "path": ["roadmaps", "generate"] }
+          }
+        },
+        {
+          "name": "Get User Roadmaps",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/roadmaps", "host": ["{{baseUrl}}"], "path": ["roadmaps"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "AI Career Assistant",
+      "item": [
+        {
+          "name": "Send Chat Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"What should I learn next based on my skills?\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/ai/chat", "host": ["{{baseUrl}}"], "path": ["ai", "chat"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "Get Analytics Stats",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/dashboard/stats", "host": ["{{baseUrl}}"], "path": ["dashboard", "stats"] }
+          }
+        },
+        {
+          "name": "Get Progress & Velocity",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/dashboard/progress", "host": ["{{baseUrl}}"], "path": ["dashboard", "progress"] }
+          }
+        }
+      ]
+    }
+  ]
+}
