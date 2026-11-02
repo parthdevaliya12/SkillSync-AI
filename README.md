@@ -139,8 +139,29 @@ For rapid evaluation and project presentation:
 
 ---
 
-## 📦 Deployment Guide
+## 🌐 Live Deployments & Environments
 
-1. **Database**: Hosted on [Neon](https://neon.tech) PostgreSQL with connection pooling enabled.
-2. **Backend**: Deploy `skillsync-ai/server` to Render, Railway, or AWS EC2 with environment variables from `.env`.
-3. **Frontend**: Deploy `skillsync-ai/client` to Vercel or Netlify with `VITE_API_URL` pointing to your deployed backend.
+| Environment | Service | URL | Status |
+|---|---|---|---|
+| **Production** | Frontend (Vercel) | [https://skills-sync-ai.vercel.app](https://skills-sync-ai.vercel.app) | Live |
+| **Production** | Backend API (Render) | [https://skillsync-ai-yp0s.onrender.com](https://skillsync-ai-yp0s.onrender.com) | Live |
+| **Production** | API Health Status | [https://skillsync-ai-yp0s.onrender.com/api/health](https://skillsync-ai-yp0s.onrender.com/api/health) | Live |
+| **Production** | PostgreSQL Database | [Neon Serverless PostgreSQL](https://neon.tech) | Connected |
+| **Local Dev** | Frontend (Vite) | `http://localhost:5173` | Local |
+| **Local Dev** | Backend (Express) | `http://localhost:5000` | Local |
+
+---
+
+## 📦 Deployment Configuration
+
+The application is engineered for automatic dual-environment support:
+1. **Frontend (Vercel)**:
+   - When running on `https://skills-sync-ai.vercel.app` or any non-localhost domain, API requests automatically route to `https://skillsync-ai-yp0s.onrender.com/api`.
+   - `vercel.json` provides SPA routing rewrites and an API reverse proxy fallback.
+   - Built-in 60s timeout accommodates Render free-tier cold starts.
+2. **Backend (Render)**:
+   - Configured with dynamic CORS accepting `https://skills-sync-ai.vercel.app`, Vercel preview URLs (`*.vercel.app`), and local dev hosts (`localhost:5173`, `localhost:3000`).
+   - Relaxed cross-origin resource policy in Helmet for seamless cross-domain PDF processing and REST operations.
+3. **Local Development**:
+   - Running `npm run dev` in `client` connects via Vite proxy to `http://localhost:5000`.
+   - Setting `VITE_BACKEND_TARGET` allows local frontend testing against live Render backend if desired.

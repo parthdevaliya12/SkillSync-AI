@@ -1,7 +1,39 @@
 import axios from 'axios';
 
+/**
+ * Intelligent Base URL resolver:
+ * 1. Checks import.meta.env.VITE_API_URL if explicitly defined.
+ * 2. On live production deployments (e.g. skills-sync-ai.vercel.app),
+ *    defaults to the live Render backend: https://skillsync-ai-yp0s.onrender.com/api
+ * 3. On local development (localhost / 127.0.0.1), defaults to '/api' which Vite proxies to http://localhost:5000
+ */
+const getBaseURL = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (envUrl && typeof envUrl === 'string' && envUrl.trim() !== '') {
+    return envUrl.trim().replace(/\/$/, '');
+  }
+
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    const isLocal =
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1' ||
+      hostname.startsWith('192.168.') ||
+      hostname.startsWith('10.');
+
+    if (!isLocal) {
+      return 'https://skillsync-ai-yp0s.onrender.com/api';
+    }
+  }
+
+  return '/api';
+};
+
+export const API_BASE_URL = getBaseURL();
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: API_BASE_URL,
+  timeout: 60000, // 60s timeout to allow Render free tier wake-ups without timing out
   headers: {
     'Content-Type': 'application/json',
   },

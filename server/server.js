@@ -29,8 +29,10 @@ const startServer = async () => {
     // Start server
     app.listen(PORT, () => {
       console.log(`\n🚀 SkillSync AI Server running on port ${PORT}`);
-      console.log(`📡 API: http://localhost:${PORT}/api`);
-      console.log(`🏥 Health: http://localhost:${PORT}/api/health`);
+      console.log(`📡 Local API: http://localhost:${PORT}/api`);
+      console.log(`🌐 Live Render API: https://skillsync-ai-yp0s.onrender.com/api`);
+      console.log(`💻 Live Vercel Frontend: https://skills-sync-ai.vercel.app`);
+      console.log(`🏥 Health Check: http://localhost:${PORT}/api/health`);
       console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}\n`);
     });
   } catch (error) {
