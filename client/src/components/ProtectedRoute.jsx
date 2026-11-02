@@ -9,12 +9,12 @@ const ProtectedRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center text-white">
+      <div className="min-h-screen bg-[#060810] flex flex-col items-center justify-center text-white font-sans selection:bg-brand-500 selection:text-white">
         <div className="relative flex items-center justify-center">
-          <div className="w-16 h-16 rounded-2xl border-4 border-indigo-500/20 border-t-indigo-500 animate-spin"></div>
-          <div className="absolute font-mono text-xs font-semibold text-indigo-400">AI</div>
+          <div className="w-16 h-16 rounded-2xl border-4 border-brand-500/20 border-t-brand-500 animate-spin"></div>
+          <div className="absolute font-mono text-xs font-bold text-cyan-400">AI</div>
         </div>
-        <p className="mt-4 text-slate-400 text-sm font-medium tracking-wide animate-pulse">
+        <p className="mt-4 text-slate-400 text-sm font-medium tracking-wide animate-pulse font-mono">
           Authenticating SkillSync AI...
         </p>
       </div>

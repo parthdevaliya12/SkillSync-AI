@@ -63,10 +63,10 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#fbfbfe] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-mesh font-sans selection:bg-purple-600 selection:text-white">
+    <div className="min-h-screen bg-[#fbfbfe] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-mesh font-sans selection:bg-brand-500 selection:text-white">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
         <Link to="/" className="inline-flex items-center gap-3 group">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 via-purple-600 to-cyan-500 p-0.5 shadow-glow flex items-center justify-center transition-transform group-hover:scale-105">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 via-brand-500 to-cyan-500 p-0.5 shadow-glow flex items-center justify-center transition-transform group-hover:scale-105">
             <div className="w-full h-full bg-[#0c0e18] rounded-[14px] flex items-center justify-center">
               <Compass className="w-6 h-6 text-cyan-400 group-hover:rotate-45 transition-transform duration-500" />
             </div>
@@ -118,7 +118,7 @@ const ForgotPassword = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl text-sm font-bold text-white bg-gradient-to-r from-brand-600 via-purple-600 to-cyan-500 hover:shadow-glow hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl text-sm font-bold text-white bg-gradient-to-r from-brand-600 via-brand-500 to-cyan-500 hover:shadow-glow hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50"
               >
                 {loading ? (
                   <>
@@ -138,7 +138,7 @@ const ForgotPassword = () => {
           {step === 2 && (
             <form onSubmit={handleResetPassword} className="space-y-4">
               {message && (
-                <div className="p-3.5 rounded-xl bg-purple-50 border border-purple-200 text-brand-800 text-xs font-semibold mb-2">
+                <div className="p-3.5 rounded-xl bg-brand-50 border border-brand-200 text-brand-800 text-xs font-semibold mb-2">
                   {message}
                 </div>
               )}
@@ -185,7 +185,7 @@ const ForgotPassword = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl text-sm font-bold text-white bg-gradient-to-r from-brand-600 via-purple-600 to-cyan-500 hover:shadow-glow transition-all disabled:opacity-50"
+                  className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl text-sm font-bold text-white bg-gradient-to-r from-brand-600 via-brand-500 to-cyan-500 hover:shadow-glow transition-all disabled:opacity-50"
                 >
                   {loading ? (
                     <>
@@ -211,7 +211,7 @@ const ForgotPassword = () => {
               </p>
               <Link
                 to="/login"
-                className="inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-2xl font-bold text-sm text-white bg-gradient-to-r from-brand-600 to-purple-700 shadow-glow"
+                className="inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-2xl font-bold text-sm text-white bg-gradient-to-r from-brand-600 to-cyan-600 shadow-glow"
               >
                 <span>Proceed to Sign In</span>
                 <ArrowRight className="w-4 h-4 text-cyan-200" />

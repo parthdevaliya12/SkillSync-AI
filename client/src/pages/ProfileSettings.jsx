@@ -53,7 +53,7 @@ const ProfileSettings = () => {
       <div className="bg-white p-7 sm:p-9 rounded-3xl border border-[#e8e9f2] shadow-premium space-y-8">
         {/* User Card Header */}
         <div className="flex flex-col sm:flex-row items-center gap-5 pb-6 border-b border-slate-100">
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-brand-600 via-purple-600 to-cyan-500 text-white font-extrabold text-2xl flex items-center justify-center shadow-glow">
+          <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-brand-600 via-brand-500 to-cyan-500 text-white font-extrabold text-2xl flex items-center justify-center shadow-glow">
             {user?.fullName?.charAt(0)?.toUpperCase() || 'U'}
           </div>
 
@@ -225,7 +225,7 @@ const ProfileSettings = () => {
             <button
               type="submit"
               disabled={saving}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl font-bold text-xs text-white bg-gradient-to-r from-brand-600 via-purple-600 to-cyan-500 hover:shadow-glow hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl font-bold text-xs text-white bg-gradient-to-r from-brand-600 via-brand-500 to-cyan-500 hover:shadow-glow hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
             >
               {saving ? (
                 <>

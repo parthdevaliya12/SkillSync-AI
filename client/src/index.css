@@ -4,11 +4,11 @@
 
 @layer base {
   * {
-    border-color: #e8e9f2;
+    border-color: #e9ebf2;
   }
   body {
-    background-color: #fbfbfe;
-    color: #0f121e;
+    background-color: #fcfcfd;
+    color: #0b0f19;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     letter-spacing: -0.011em;
   }
@@ -24,15 +24,15 @@
   height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #f4f4f9;
+  background: #f5f6f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd0df;
+  background: #d0d5e2;
   border-radius: 9999px;
   border: 1px solid transparent;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #9333ea;
+  background: #ea580c;
 }
 
 /* Glassmorphism utilities */
@@ -40,30 +40,30 @@
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(232, 233, 242, 0.9);
+  border: 1px solid rgba(233, 235, 242, 0.9);
 }
 
 .glass-dark {
-  background: rgba(12, 14, 24, 0.88);
+  background: rgba(11, 15, 25, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(147, 51, 234, 0.15);
+  border: 1px solid rgba(234, 88, 12, 0.18);
 }
 
-/* Modern Gradient Mesh Background */
+/* Modern Unique Gradient Mesh Background (Solar Flare & Cyber Teal) */
 .bg-gradient-mesh {
   background-image: 
-    radial-gradient(at 0% 0%, rgba(147, 51, 234, 0.12) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, rgba(192, 132, 252, 0.08) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(52, 211, 153, 0.08) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(234, 88, 12, 0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(20, 184, 166, 0.14) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(251, 146, 60, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(45, 212, 191, 0.08) 0px, transparent 50%);
 }
 
 .bg-gradient-mesh-dark {
   background-image: 
-    radial-gradient(at 10% 15%, rgba(147, 51, 234, 0.22) 0px, transparent 50%),
-    radial-gradient(at 90% 20%, rgba(16, 185, 129, 0.18) 0px, transparent 50%),
-    radial-gradient(at 50% 85%, rgba(126, 34, 206, 0.18) 0px, transparent 50%);
+    radial-gradient(at 10% 15%, rgba(234, 88, 12, 0.22) 0px, transparent 50%),
+    radial-gradient(at 90% 20%, rgba(20, 184, 166, 0.2) 0px, transparent 50%),
+    radial-gradient(at 50% 85%, rgba(194, 65, 12, 0.2) 0px, transparent 50%);
 }
 
 .bg-gradient-radial {
@@ -81,36 +81,20 @@
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, #f4f4f9 25%, #e8e9f2 50%, #f4f4f9 75%);
+  background: linear-gradient(90deg, #f5f6f9 25%, #e9ebf2 50%, #f5f6f9 75%);
   background-size: 200% 100%;
   animation: shimmer 1.8s infinite linear;
 }
 
-/* Subtle glow badge animation */
-@keyframes pulse-subtle {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.85;
-    transform: scale(1.02);
-  }
-}
-
-.animate-pulse-subtle {
-  animation: pulse-subtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
 /* Custom gradient text utility */
 .text-gradient-brand {
-  background: linear-gradient(135deg, #9333ea 0%, #7e22ce 50%, #10b981 100%);
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #14b8a6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.text-gradient-emerald {
-  background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #059669 100%);
+.text-gradient-teal {
+  background: linear-gradient(135deg, #14b8a6 0%, #2dd4bf 50%, #0d9488 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

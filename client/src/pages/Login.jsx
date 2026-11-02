@@ -47,10 +47,10 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#fbfbfe] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-mesh font-sans selection:bg-purple-600 selection:text-white">
+    <div className="min-h-screen bg-[#fbfbfe] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-mesh font-sans selection:bg-brand-500 selection:text-white">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
         <Link to="/" className="inline-flex items-center gap-3 group">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 via-purple-600 to-cyan-500 p-0.5 shadow-glow flex items-center justify-center transition-transform group-hover:scale-105">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 via-brand-500 to-cyan-500 p-0.5 shadow-glow flex items-center justify-center transition-transform group-hover:scale-105">
             <div className="w-full h-full bg-[#0c0e18] rounded-[14px] flex items-center justify-center">
               <Compass className="w-6 h-6 text-cyan-400 group-hover:rotate-45 transition-transform duration-500" />
             </div>
@@ -128,7 +128,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl text-sm font-bold text-white bg-gradient-to-r from-brand-600 via-purple-600 to-cyan-500 hover:shadow-glow hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl text-sm font-bold text-white bg-gradient-to-r from-brand-600 via-brand-500 to-cyan-500 hover:shadow-glow hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50"
             >
               {loading ? (
                 <>
@@ -149,7 +149,7 @@ const Login = () => {
             <button
               type="button"
               onClick={fillDemoAccount}
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-purple-200/70 bg-purple-50/50 text-xs font-bold text-brand-700 hover:bg-purple-100/60 transition-colors"
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-brand-200/70 bg-brand-50/60 text-xs font-bold text-brand-700 hover:bg-brand-100/60 transition-colors"
             >
               <Sparkles className="w-3.5 h-3.5 text-brand-600" />
               <span>Auto-fill Demo Credentials</span>

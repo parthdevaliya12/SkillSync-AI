@@ -122,7 +122,7 @@ const JobAnalyzer = () => {
       </div>
 
       {/* Main Analysis Form Card */}
-      <div className="bg-white p-7 sm:p-9 rounded-3xl border border-[#e8e9f2] shadow-premium">
+      <div className="bg-white p-7 sm:p-9 rounded-3xl border border-[#e9ebf2] shadow-premium">
         <form onSubmit={handleAnalyze} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -134,7 +134,7 @@ const JobAnalyzer = () => {
                 value={jobTitle}
                 onChange={(e) => setJobTitle(e.target.value)}
                 placeholder="e.g. Full Stack Engineer, Cloud Architect"
-                className="w-full px-4 py-3 rounded-2xl border border-[#e8e9f2] text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all"
+                className="w-full px-4 py-3 rounded-2xl border border-[#e9ebf2] text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all font-body"
               />
             </div>
 
@@ -149,7 +149,7 @@ const JobAnalyzer = () => {
                   value={companyName}
                   onChange={(e) => setCompanyName(e.target.value)}
                   placeholder="e.g. Google, Microsoft, Stripe"
-                  className="w-full pl-11 pr-4 py-3 rounded-2xl border border-[#e8e9f2] text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all"
+                  className="w-full pl-11 pr-4 py-3 rounded-2xl border border-[#e9ebf2] text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all font-body"
                 />
               </div>
             </div>
@@ -164,7 +164,7 @@ const JobAnalyzer = () => {
               value={jobDescription}
               onChange={(e) => setJobDescription(e.target.value)}
               placeholder="Paste the full job specification here, including responsibilities, required technical skills, qualifications, and preferred tools..."
-              className="w-full p-4 rounded-2xl border border-[#e8e9f2] text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none leading-relaxed transition-all"
+              className="w-full p-4 rounded-2xl border border-[#e9ebf2] text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none leading-relaxed transition-all font-body"
             />
           </div>
 
@@ -174,7 +174,7 @@ const JobAnalyzer = () => {
               Or Upload Job Description PDF (Max 5MB)
             </label>
             <div className="flex flex-wrap items-center gap-4">
-              <label className="cursor-pointer inline-flex items-center gap-2 px-5 py-3 rounded-2xl border border-dashed border-purple-300 bg-purple-50/40 hover:bg-purple-100/50 text-xs font-bold text-brand-700 transition-colors">
+              <label className="cursor-pointer inline-flex items-center gap-2 px-5 py-3 rounded-2xl border border-dashed border-orange-300 bg-orange-50/40 hover:bg-orange-100/50 text-xs font-bold text-brand-700 transition-colors">
                 <UploadCloud className="w-4 h-4 text-brand-600" />
                 <span>{selectedPdf ? selectedPdf.name : 'Select PDF Document'}</span>
                 <input
@@ -205,7 +205,7 @@ const JobAnalyzer = () => {
             <button
               type="submit"
               disabled={analyzing}
-              className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl font-bold text-sm text-white bg-gradient-to-r from-brand-600 via-purple-600 to-cyan-500 hover:shadow-glow hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl font-bold text-sm text-white bg-gradient-to-r from-brand-600 via-orange-500 to-amber-500 hover:shadow-glow hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
             >
               {analyzing ? (
                 <>
@@ -240,11 +240,11 @@ const JobAnalyzer = () => {
               return (
                 <div
                   key={job.id}
-                  className="bg-white p-6 rounded-3xl border border-[#e8e9f2] shadow-card hover:shadow-card-hover hover:border-purple-200 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                  className="bg-white p-6 rounded-3xl border border-[#e9ebf2] shadow-card hover:shadow-card-hover hover:border-orange-200 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-start justify-between mb-3">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-brand-600 bg-purple-50 border border-purple-100 px-3 py-1 rounded-full font-mono">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-brand-700 bg-orange-50 border border-orange-200 px-3 py-1 rounded-full font-mono">
                         {job.source_type === 'pdf' ? 'PDF Upload' : 'Text Input'}
                       </span>
                       <button
@@ -257,7 +257,7 @@ const JobAnalyzer = () => {
                     </div>
 
                     <h4 className="text-lg font-extrabold text-slate-900 font-sans leading-snug">{job.job_title}</h4>
-                    <p className="text-xs text-slate-500 mb-3">{job.company_name || 'Target Employer'}</p>
+                    <p className="text-xs text-slate-500 mb-3 font-body">{job.company_name || 'Target Employer'}</p>
 
                     {aiData.summary && (
                       <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-4 font-body">
@@ -270,7 +270,7 @@ const JobAnalyzer = () => {
                         {requiredCount} Required
                       </span>
                       {preferredCount > 0 && (
-                        <span className="font-bold text-purple-800 bg-purple-50 border border-purple-200 px-2.5 py-0.5 rounded-lg">
+                        <span className="font-bold text-brand-800 bg-orange-50 border border-orange-200 px-2.5 py-0.5 rounded-lg">
                           {preferredCount} Preferred
                         </span>
                       )}
@@ -287,7 +287,7 @@ const JobAnalyzer = () => {
 
                     <Link
                       to={`/skill-gap/${job.id}`}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-bold text-xs bg-gradient-to-r from-brand-600 to-purple-700 text-white hover:shadow-glow transition-all"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-bold text-xs bg-gradient-to-r from-brand-600 to-orange-600 text-white hover:shadow-glow transition-all"
                     >
                       <span>Check Gap</span>
                       <ArrowRight className="w-3.5 h-3.5" />

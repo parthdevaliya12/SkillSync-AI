@@ -114,7 +114,7 @@ const RoadmapDetails = () => {
       <div className="flex items-center justify-between">
         <Link
           to="/roadmaps"
-          className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-brand-600 transition-colors"
+          className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-brand-600 transition-colors font-sans"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Roadmaps</span>
@@ -130,13 +130,13 @@ const RoadmapDetails = () => {
       </div>
 
       {/* Hero Curriculum Card */}
-      <div className="p-8 sm:p-9 rounded-3xl bg-white border border-[#e8e9f2] shadow-premium space-y-6">
+      <div className="p-8 sm:p-9 rounded-3xl bg-white border border-[#e9ebf2] shadow-premium space-y-6">
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
           <div className="space-y-2">
             <span className={`text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full font-mono ${
               roadmap.status === 'completed'
                 ? 'bg-cyan-50 text-cyan-800 border border-cyan-200'
-                : 'bg-purple-50 text-brand-700 border border-purple-200'
+                : 'bg-orange-50 text-brand-700 border border-orange-200'
             }`}>
               {roadmap.status === 'completed' ? 'Mastery Completed 🎉' : 'Active Learning Path'}
             </span>
@@ -148,15 +148,15 @@ const RoadmapDetails = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-6 p-4 rounded-2xl bg-purple-50/50 border border-purple-100/70 shrink-0">
+          <div className="flex items-center gap-6 p-4 rounded-2xl bg-orange-50/50 border border-orange-100/70 shrink-0">
             <div className="text-center">
               <div className="text-3xl font-black text-brand-600 font-mono">{progress}%</div>
-              <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Completed</span>
+              <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider font-mono">Completed</span>
             </div>
-            <div className="w-px h-10 bg-purple-200/60"></div>
+            <div className="w-px h-10 bg-orange-200/60"></div>
             <div className="text-center">
               <div className="text-3xl font-black text-cyan-600 font-mono">{roadmap.total_weeks}</div>
-              <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Weeks</span>
+              <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider font-mono">Weeks</span>
             </div>
           </div>
         </div>
@@ -164,7 +164,7 @@ const RoadmapDetails = () => {
         {/* Progress Bar */}
         <div className="w-full h-3 rounded-full bg-slate-100 overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-brand-600 via-purple-600 to-cyan-500 rounded-full transition-all duration-500"
+            className="h-full bg-gradient-to-r from-brand-600 via-orange-500 to-cyan-500 rounded-full transition-all duration-500"
             style={{ width: `${progress}%` }}
           ></div>
         </div>
@@ -186,23 +186,23 @@ const RoadmapDetails = () => {
           return (
             <div
               key={weekNum}
-              className="bg-white rounded-3xl border border-[#e8e9f2] shadow-card overflow-hidden"
+              className="bg-white rounded-3xl border border-[#e9ebf2] shadow-card overflow-hidden"
             >
               {/* Week Header */}
-              <div className="p-6 bg-purple-50/40 border-b border-[#e8e9f2] flex items-center justify-between">
+              <div className="p-6 bg-orange-50/30 border-b border-[#e9ebf2] flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-purple-700 text-white font-mono font-bold text-xs flex items-center justify-center shadow-sm">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-orange-600 text-white font-mono font-bold text-xs flex items-center justify-center shadow-sm">
                     W{weekNum}
                   </div>
                   <div>
                     <h3 className="text-base font-extrabold text-slate-900 font-sans">Week {weekNum} Curriculum</h3>
-                    <p className="text-xs text-slate-500 mt-0.5">
+                    <p className="text-xs text-slate-500 mt-0.5 font-body">
                       {completedInWeek} of {tasks.length} tasks finished
                     </p>
                   </div>
                 </div>
 
-                <span className="text-xs font-mono font-bold text-brand-600 bg-white px-3 py-1 rounded-full border border-purple-100 shadow-sm">
+                <span className="text-xs font-mono font-bold text-brand-600 bg-white px-3 py-1 rounded-full border border-orange-100 shadow-sm">
                   {Math.round((completedInWeek / tasks.length) * 100)}% Week Done
                 </span>
               </div>
@@ -241,7 +241,7 @@ const RoadmapDetails = () => {
 
                         <div className="flex items-center gap-2">
                           {task.skill_name && (
-                            <span className="text-[10px] font-bold text-brand-700 bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-200 font-mono">
+                            <span className="text-[10px] font-bold text-brand-700 bg-orange-50 px-2.5 py-0.5 rounded-full border border-orange-200 font-mono">
                               {task.skill_name}
                             </span>
                           )}
@@ -271,10 +271,10 @@ const RoadmapDetails = () => {
                               href={res.url || '#'}
                               target="_blank"
                               rel="noreferrer"
-                              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-purple-50/50 hover:bg-purple-100/70 border border-purple-200/60 text-[11px] font-semibold text-slate-700 hover:text-brand-700 transition-colors"
+                              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-orange-50/50 hover:bg-orange-100/70 border border-orange-200/60 text-[11px] font-semibold text-slate-700 hover:text-brand-700 transition-colors"
                             >
                               <BookOpen className="w-3 h-3 text-brand-500" />
-                              <span>{res.title}</span>
+                              <span className="font-body">{res.title}</span>
                               {res.isFree && (
                                 <span className="text-[9px] font-extrabold uppercase text-cyan-600 font-mono">FREE</span>
                               )}

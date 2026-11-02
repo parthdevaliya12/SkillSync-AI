@@ -31,18 +31,18 @@ function App() {
         toastOptions={{
           duration: 4000,
           style: {
-            background: '#0c0e18',
+            background: '#0b0f19',
             color: '#fff',
             borderRadius: '18px',
             fontSize: '13px',
             padding: '12px 18px',
-            boxShadow: '0 20px 40px -15px rgba(12, 14, 24, 0.4)',
-            border: '1px solid #1e2238',
+            boxShadow: '0 20px 40px -15px rgba(11, 15, 25, 0.4)',
+            border: '1px solid #1e2638',
             fontFamily: 'Outfit, sans-serif',
           },
           success: {
             iconTheme: {
-              primary: '#10b981',
+              primary: '#14b8a6',
               secondary: '#fff',
             },
           },

@@ -27,7 +27,7 @@ const DashboardLayout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#fbfbfe] font-sans flex flex-col selection:bg-purple-600 selection:text-white">
+    <div className="min-h-screen bg-[#fcfcfd] font-sans flex flex-col selection:bg-orange-500 selection:text-white">
       {/* Sidebar Component */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 

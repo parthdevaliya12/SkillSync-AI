@@ -147,9 +147,9 @@ const MySkills = () => {
   const getProficiencyBadge = (level) => {
     switch (level) {
       case 'beginner':
-        return 'bg-purple-50 text-brand-700 border-purple-200';
+        return 'bg-amber-50 text-amber-800 border-amber-200';
       case 'intermediate':
-        return 'bg-amber-50 text-amber-700 border-amber-200';
+        return 'bg-orange-50 text-brand-700 border-orange-200';
       case 'advanced':
         return 'bg-cyan-50 text-cyan-800 border-cyan-200';
       default:
@@ -170,7 +170,7 @@ const MySkills = () => {
 
         <button
           onClick={handleOpenAdd}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-xs text-white bg-gradient-to-r from-brand-600 via-purple-600 to-cyan-500 hover:shadow-glow hover:scale-[1.02] active:scale-[0.98] transition-all"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-xs text-white bg-gradient-to-r from-brand-600 via-orange-500 to-amber-500 hover:shadow-glow hover:scale-[1.02] active:scale-[0.98] transition-all"
         >
           <Plus className="w-4 h-4" />
           <span>Add New Skill</span>
@@ -178,7 +178,7 @@ const MySkills = () => {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white p-5 rounded-3xl border border-[#e8e9f2] shadow-card flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="bg-white p-5 rounded-3xl border border-[#e9ebf2] shadow-card flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Search */}
         <div className="relative w-full md:w-80">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
@@ -187,7 +187,7 @@ const MySkills = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search skills (e.g. React, PostgreSQL)..."
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#e8e9f2] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#e9ebf2] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all font-body"
           />
         </div>
 
@@ -199,8 +199,8 @@ const MySkills = () => {
               onClick={() => setSelectedCategory(cat)}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                 selectedCategory === cat
-                  ? 'bg-gradient-to-r from-brand-600 to-purple-700 text-white shadow-glow'
-                  : 'bg-purple-50/50 text-slate-600 hover:bg-purple-100/60 hover:text-slate-900'
+                  ? 'bg-gradient-to-r from-brand-600 to-orange-600 text-white shadow-glow'
+                  : 'bg-orange-50/40 text-slate-600 hover:bg-orange-100/60 hover:text-slate-900'
               }`}
             >
               {cat}
@@ -217,7 +217,7 @@ const MySkills = () => {
           {filteredSkills.map((skill) => (
             <div
               key={skill.id}
-              className="bg-white p-6 rounded-3xl border border-[#e8e9f2] shadow-card hover:shadow-card-hover hover:border-purple-200 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+              className="bg-white p-6 rounded-3xl border border-[#e9ebf2] shadow-card hover:shadow-card-hover hover:border-orange-200 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-start justify-between mb-3">
@@ -237,7 +237,7 @@ const MySkills = () => {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2 text-xs text-slate-500 mb-4">
+                <div className="flex items-center gap-2 text-xs text-slate-500 mb-4 font-body">
                   <Briefcase className="w-3.5 h-3.5 text-brand-500" />
                   <span>{skill.years_experience} years practical experience</span>
                 </div>
@@ -251,7 +251,7 @@ const MySkills = () => {
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={() => handleOpenEdit(skill)}
-                    className="p-2 text-slate-400 hover:text-brand-600 hover:bg-purple-50 rounded-xl transition-colors"
+                    className="p-2 text-slate-400 hover:text-brand-600 hover:bg-orange-50 rounded-xl transition-colors"
                     title="Edit skill"
                   >
                     <Edit2 className="w-4 h-4" />
@@ -280,8 +280,8 @@ const MySkills = () => {
 
       {/* Add / Edit Skill Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#07080e]/75 backdrop-blur-md animate-in fade-in">
-          <div className="bg-white w-full max-w-md rounded-3xl p-7 shadow-premium border border-purple-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#060810]/75 backdrop-blur-md animate-in fade-in">
+          <div className="bg-white w-full max-w-md rounded-3xl p-7 shadow-premium border border-orange-100">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100">
               <h3 className="text-lg font-extrabold text-slate-900 font-sans">
                 {modalMode === 'add' ? 'Add Skill to Portfolio' : `Edit ${currentSkill?.name}`}
@@ -312,7 +312,7 @@ const MySkills = () => {
                           category: s ? s.category : formData.category,
                         });
                       }}
-                      className="w-full p-3 rounded-xl border border-[#e8e9f2] text-xs font-medium focus:ring-2 focus:ring-brand-500"
+                      className="w-full p-3 rounded-xl border border-[#e9ebf2] text-xs font-medium focus:ring-2 focus:ring-brand-500 font-body"
                     >
                       <option value="">-- Or enter custom skill below --</option>
                       {masterSkills.map((s) => (
@@ -334,7 +334,7 @@ const MySkills = () => {
                           value={formData.skillName}
                           onChange={(e) => setFormData({ ...formData, skillName: e.target.value })}
                           placeholder="e.g. Next.js, Redis, PyTorch"
-                          className="w-full p-3 rounded-xl border border-[#e8e9f2] text-xs font-medium focus:ring-2 focus:ring-brand-500"
+                          className="w-full p-3 rounded-xl border border-[#e9ebf2] text-xs font-medium focus:ring-2 focus:ring-brand-500 font-body"
                           required
                         />
                       </div>
@@ -346,7 +346,7 @@ const MySkills = () => {
                         <select
                           value={formData.category}
                           onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                          className="w-full p-3 rounded-xl border border-[#e8e9f2] text-xs font-medium"
+                          className="w-full p-3 rounded-xl border border-[#e9ebf2] text-xs font-medium font-body"
                         >
                           {CATEGORIES.filter((c) => c !== 'All').map((c) => (
                             <option key={c} value={c}>{c}</option>
@@ -371,7 +371,7 @@ const MySkills = () => {
                       className={`py-2.5 rounded-xl text-xs font-bold uppercase border transition-all ${
                         formData.proficiency === lvl
                           ? 'bg-brand-600 text-white border-brand-600 shadow-glow'
-                          : 'bg-purple-50/50 text-slate-600 border-purple-100 hover:bg-purple-100/70'
+                          : 'bg-orange-50/40 text-slate-600 border-orange-100 hover:bg-orange-100/70'
                       }`}
                     >
                       {lvl}
@@ -391,7 +391,7 @@ const MySkills = () => {
                   max="30"
                   value={formData.yearsExperience}
                   onChange={(e) => setFormData({ ...formData, yearsExperience: e.target.value })}
-                  className="w-full p-3 rounded-xl border border-[#e8e9f2] text-xs font-medium focus:ring-2 focus:ring-brand-500"
+                  className="w-full p-3 rounded-xl border border-[#e9ebf2] text-xs font-medium focus:ring-2 focus:ring-brand-500 font-mono"
                 />
               </div>
 
@@ -406,7 +406,7 @@ const MySkills = () => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-brand-600 to-purple-700 hover:shadow-glow disabled:opacity-50 transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-brand-600 to-orange-600 hover:shadow-glow disabled:opacity-50 transition-all"
                 >
                   {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>Save Skill</span>}
                 </button>

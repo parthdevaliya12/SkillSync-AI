@@ -97,12 +97,12 @@ const AIAssistant = () => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-135px)] bg-white rounded-3xl border border-[#e8e9f2] shadow-premium overflow-hidden font-sans">
+    <div className="flex flex-col h-[calc(100vh-135px)] bg-white rounded-3xl border border-[#e9ebf2] shadow-premium overflow-hidden font-sans">
       {/* Chat Header */}
-      <div className="p-4 sm:px-6 bg-[#0c0e18] text-white flex items-center justify-between shrink-0 border-b border-[#1e2238]">
+      <div className="p-4 sm:px-6 bg-[#0b0f19] text-white flex items-center justify-between shrink-0 border-b border-[#1e2638]">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 via-purple-600 to-cyan-500 p-0.5 flex items-center justify-center shadow-glow">
-            <div className="w-full h-full bg-[#0c0e18] rounded-[14px] flex items-center justify-center">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 via-orange-500 to-cyan-500 p-0.5 flex items-center justify-center shadow-glow">
+            <div className="w-full h-full bg-[#0b0f19] rounded-[14px] flex items-center justify-center">
               <Bot className="w-5 h-5 text-cyan-400" />
             </div>
           </div>
@@ -127,14 +127,14 @@ const AIAssistant = () => {
       </div>
 
       {/* Message List Area */}
-      <div className="flex-1 p-4 sm:p-6 overflow-y-auto space-y-5 bg-[#fbfbfe]">
+      <div className="flex-1 p-4 sm:p-6 overflow-y-auto space-y-5 bg-[#fcfcfd]">
         {loadingHistory ? (
           <div className="flex items-center justify-center h-full">
             <Loader2 className="w-6 h-6 animate-spin text-brand-600" />
           </div>
         ) : messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center max-w-lg mx-auto space-y-6">
-            <div className="w-16 h-16 rounded-3xl bg-purple-50 text-brand-600 border border-purple-100 flex items-center justify-center shadow-sm">
+            <div className="w-16 h-16 rounded-3xl bg-orange-50 text-brand-600 border border-orange-100 flex items-center justify-center shadow-sm">
               <Sparkles className="w-8 h-8 text-brand-600" />
             </div>
             <div>
@@ -152,7 +152,7 @@ const AIAssistant = () => {
                 <button
                   key={idx}
                   onClick={() => handleSendMessage(prompt)}
-                  className="p-3.5 rounded-2xl bg-white hover:bg-purple-50/70 border border-[#e8e9f2] hover:border-purple-200 text-xs text-slate-700 hover:text-brand-900 font-semibold transition-all shadow-card flex items-start justify-between gap-2 group"
+                  className="p-3.5 rounded-2xl bg-white hover:bg-orange-50/70 border border-[#e9ebf2] hover:border-orange-200 text-xs text-slate-700 hover:text-brand-900 font-semibold transition-all shadow-card flex items-start justify-between gap-2 group"
                 >
                   <span className="font-body">{prompt}</span>
                   <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-brand-600 shrink-0 mt-0.5" />
@@ -171,25 +171,28 @@ const AIAssistant = () => {
               >
                 {/* Avatar */}
                 <div
-                  className={`w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 ${isUser
-                    ? 'bg-slate-900 text-white shadow-sm'
-                    : 'bg-gradient-to-tr from-brand-600 to-cyan-500 text-white shadow-sm'
-                    }`}
+                  className={`w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 ${
+                    isUser
+                      ? 'bg-slate-900 text-white shadow-sm'
+                      : 'bg-gradient-to-tr from-brand-600 to-cyan-500 text-white shadow-sm'
+                  }`}
                 >
                   {isUser ? user?.fullName?.charAt(0) || 'U' : <Bot className="w-4 h-4" />}
                 </div>
 
                 {/* Bubble */}
                 <div
-                  className={`p-4 rounded-2xl text-xs sm:text-sm leading-relaxed ${isUser
-                    ? 'bg-gradient-to-r from-brand-600 to-purple-700 text-white shadow-glow'
-                    : 'bg-white border border-[#e8e9f2] text-slate-800 shadow-card whitespace-pre-wrap font-body'
-                    }`}
+                  className={`p-4 rounded-2xl text-xs sm:text-sm leading-relaxed ${
+                    isUser
+                      ? 'bg-gradient-to-r from-brand-600 via-orange-600 to-amber-600 text-white shadow-glow'
+                      : 'bg-white border border-[#e9ebf2] text-slate-800 shadow-card whitespace-pre-wrap font-body'
+                  }`}
                 >
                   {msg.content}
                   <div
-                    className={`text-[10px] mt-2 font-mono ${isUser ? 'text-purple-200 text-right' : 'text-slate-400'
-                      }`}
+                    className={`text-[10px] mt-2 font-mono ${
+                      isUser ? 'text-orange-200 text-right' : 'text-slate-400'
+                    }`}
                   >
                     {new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </div>
@@ -204,7 +207,7 @@ const AIAssistant = () => {
             <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-500 text-white flex items-center justify-center shrink-0">
               <Bot className="w-4 h-4 animate-pulse" />
             </div>
-            <div className="p-4 rounded-2xl bg-white border border-[#e8e9f2] text-slate-500 text-xs flex items-center gap-2 font-body">
+            <div className="p-4 rounded-2xl bg-white border border-[#e9ebf2] text-slate-500 text-xs flex items-center gap-2 font-body">
               <Loader2 className="w-4 h-4 animate-spin text-brand-600" />
               <span>SkillSync AI is analyzing your career profile...</span>
             </div>
@@ -215,7 +218,7 @@ const AIAssistant = () => {
       </div>
 
       {/* Input Form Bar */}
-      <div className="p-4 bg-white border-t border-[#e8e9f2] shrink-0">
+      <div className="p-4 bg-white border-t border-[#e9ebf2] shrink-0">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -228,14 +231,14 @@ const AIAssistant = () => {
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             placeholder="Ask about your skills, interview prep, or career roadmap..."
-            className="flex-1 px-4 py-3 rounded-2xl border border-[#e8e9f2] text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all font-body"
+            className="flex-1 px-4 py-3 rounded-2xl border border-[#e9ebf2] text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all font-body"
             disabled={sending}
           />
 
           <button
             type="submit"
             disabled={!inputMessage.trim() || sending}
-            className="p-3.5 rounded-2xl bg-gradient-to-r from-brand-600 via-purple-600 to-cyan-500 text-white hover:shadow-glow transition-all disabled:opacity-50"
+            className="p-3.5 rounded-2xl bg-gradient-to-r from-brand-600 via-orange-500 to-amber-500 text-white hover:shadow-glow transition-all disabled:opacity-50"
             aria-label="Send message"
           >
             <Send className="w-4 h-4" />

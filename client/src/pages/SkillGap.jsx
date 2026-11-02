@@ -91,7 +91,7 @@ const SkillGap = () => {
   const missing = gapData?.missing_skills ? (typeof gapData.missing_skills === 'string' ? JSON.parse(gapData.missing_skills) : gapData.missing_skills) : [];
 
   const chartData = [
-    { name: 'Matched', value: matched.length, color: '#10b981' },
+    { name: 'Matched', value: matched.length, color: '#14b8a6' },
     { name: 'Weak', value: weak.length, color: '#f59e0b' },
     { name: 'Missing', value: missing.length, color: '#f43f5e' },
   ].filter((d) => d.value > 0);
@@ -112,7 +112,7 @@ const SkillGap = () => {
             <select
               value={selectedJobId}
               onChange={(e) => setSelectedJobId(e.target.value)}
-              className="px-4 py-2.5 rounded-2xl border border-[#e8e9f2] bg-white text-xs font-bold text-slate-800 shadow-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+              className="px-4 py-2.5 rounded-2xl border border-[#e9ebf2] bg-white text-xs font-bold text-slate-800 shadow-sm focus:ring-2 focus:ring-brand-500 focus:outline-none font-body"
             >
               {jobs.map((j) => (
                 <option key={j.id} value={j.id}>
@@ -123,7 +123,7 @@ const SkillGap = () => {
 
             <button
               onClick={() => runGapAnalysis(selectedJobId)}
-              className="p-2.5 rounded-2xl border border-[#e8e9f2] bg-white hover:bg-purple-50 text-slate-600 hover:text-brand-600 transition-colors shadow-sm"
+              className="p-2.5 rounded-2xl border border-[#e9ebf2] bg-white hover:bg-orange-50 text-slate-600 hover:text-brand-600 transition-colors shadow-sm"
               title="Recalculate Gap"
             >
               <RotateCcw className="w-4 h-4" />
@@ -133,15 +133,15 @@ const SkillGap = () => {
       </div>
 
       {jobs.length === 0 ? (
-        <div className="p-12 text-center bg-white rounded-3xl border border-[#e8e9f2] shadow-card space-y-4">
+        <div className="p-12 text-center bg-white rounded-3xl border border-[#e9ebf2] shadow-card space-y-4">
           <GitCompare className="w-12 h-12 text-brand-600 mx-auto" />
           <h3 className="text-lg font-extrabold text-slate-900 font-sans">No Job Postings Available</h3>
-          <p className="text-xs text-slate-500 max-w-md mx-auto">
+          <p className="text-xs text-slate-500 max-w-md mx-auto font-body">
             Analyze your target job description first to calculate your match and readiness scores.
           </p>
           <Link
             to="/job-analyzer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-xs text-white bg-gradient-to-r from-brand-600 to-purple-700 shadow-glow hover:scale-[1.02] transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-xs text-white bg-gradient-to-r from-brand-600 to-orange-600 shadow-glow hover:scale-[1.02] transition-all"
           >
             <span>Go to Job Analyzer</span>
             <ArrowRight className="w-4 h-4 text-cyan-200" />
@@ -150,12 +150,12 @@ const SkillGap = () => {
       ) : loading ? (
         <div className="p-16 text-center space-y-3">
           <Loader2 className="w-8 h-8 animate-spin text-brand-600 mx-auto" />
-          <p className="text-xs font-bold text-slate-600">Calculating deterministic skill match scores...</p>
+          <p className="text-xs font-bold text-slate-600 font-mono">Calculating deterministic skill match scores...</p>
         </div>
       ) : gapData ? (
         <>
           {/* Readiness Score Banner */}
-          <div className="p-8 sm:p-9 rounded-3xl bg-gradient-to-r from-[#170932] via-[#0f121e] to-[#04281f] text-white border border-purple-900/40 shadow-premium relative overflow-hidden">
+          <div className="p-8 sm:p-9 rounded-3xl bg-gradient-to-r from-[#210902] via-[#0b0f19] to-[#041a18] text-white border border-orange-950/40 shadow-premium relative overflow-hidden">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10">
               <div className="space-y-2">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 bg-cyan-950/80 border border-cyan-800/50 px-3 py-1 rounded-full font-mono">
@@ -164,7 +164,7 @@ const SkillGap = () => {
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-sans">
                   {gapData.job_title || gapData.jobTitle || 'Target Position'}
                 </h3>
-                <p className="text-xs text-slate-400 flex items-center gap-1.5 font-medium">
+                <p className="text-xs text-slate-400 flex items-center gap-1.5 font-medium font-body">
                   <Building className="w-3.5 h-3.5 text-cyan-400" />
                   <span>{gapData.company_name || gapData.companyName || 'Target Employer'}</span>
                 </p>
@@ -173,25 +173,25 @@ const SkillGap = () => {
               {/* Score Badges */}
               <div className="flex flex-wrap items-center gap-6 sm:gap-8">
                 <div className="text-center">
-                  <div className="text-4xl sm:text-5xl font-black text-purple-400 font-mono">
+                  <div className="text-4xl sm:text-5xl font-black text-orange-400 font-mono">
                     {Math.round(gapData.match_percentage)}%
                   </div>
-                  <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Skill Match</span>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider font-mono">Skill Match</span>
                 </div>
 
-                <div className="w-px h-12 bg-purple-900/40 hidden sm:block"></div>
+                <div className="w-px h-12 bg-orange-900/40 hidden sm:block"></div>
 
                 <div className="text-center">
                   <div className="text-4xl sm:text-5xl font-black text-cyan-400 font-mono">
                     {Math.round(gapData.readiness_score)}%
                   </div>
-                  <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Job Readiness</span>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider font-mono">Job Readiness</span>
                 </div>
 
                 <button
                   onClick={handleGenerateRoadmap}
                   disabled={generatingRoadmap}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-xs text-slate-950 bg-gradient-to-r from-cyan-400 to-emerald-400 hover:shadow-glow-cyan hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-xs text-slate-950 bg-gradient-to-r from-cyan-400 to-teal-400 hover:shadow-glow-cyan hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
                 >
                   {generatingRoadmap ? (
                     <>
@@ -210,19 +210,19 @@ const SkillGap = () => {
             </div>
 
             {/* Ambient lighting */}
-            <div className="absolute right-0 bottom-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="absolute right-0 bottom-0 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
           </div>
 
           {/* 3 Categories Matrix */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Matched Skills */}
-            <div className="p-6 rounded-3xl bg-white border border-[#e8e9f2] shadow-card space-y-4">
+            <div className="p-6 rounded-3xl bg-white border border-[#e9ebf2] shadow-card space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                  <CheckCircle2 className="w-5 h-5 text-teal-500" />
                   <h4 className="text-sm font-bold text-slate-900 font-sans">Matched Skills</h4>
                 </div>
-                <span className="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full font-mono">
+                <span className="text-xs font-bold text-teal-700 bg-teal-50 border border-teal-200 px-2.5 py-0.5 rounded-full font-mono">
                   {matched.length} Verified
                 </span>
               </div>
@@ -232,28 +232,28 @@ const SkillGap = () => {
                   matched.map((s, i) => (
                     <div
                       key={i}
-                      className="p-3.5 rounded-2xl bg-emerald-50/50 border border-emerald-200/60 flex items-center justify-between text-xs"
+                      className="p-3.5 rounded-2xl bg-teal-50/50 border border-teal-200/60 flex items-center justify-between text-xs"
                     >
-                      <span className="font-bold text-emerald-950">{s.name}</span>
-                      <span className="text-[10px] uppercase font-bold text-emerald-700 bg-white px-2.5 py-0.5 rounded-full border border-emerald-200 font-mono">
+                      <span className="font-bold text-teal-950 font-body">{s.name}</span>
+                      <span className="text-[10px] uppercase font-bold text-teal-700 bg-white px-2.5 py-0.5 rounded-full border border-teal-200 font-mono">
                         {s.userLevel}
                       </span>
                     </div>
                   ))
                 ) : (
-                  <p className="text-xs text-slate-400 py-4 text-center">No skills matched yet.</p>
+                  <p className="text-xs text-slate-400 py-4 text-center font-body">No skills matched yet.</p>
                 )}
               </div>
             </div>
 
             {/* Weak Skills */}
-            <div className="p-6 rounded-3xl bg-white border border-[#e8e9f2] shadow-card space-y-4">
+            <div className="p-6 rounded-3xl bg-white border border-[#e9ebf2] shadow-card space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                 <div className="flex items-center gap-2">
                   <AlertTriangle className="w-5 h-5 text-amber-500" />
                   <h4 className="text-sm font-bold text-slate-900 font-sans">Weak Skills</h4>
                 </div>
-                <span className="text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full font-mono">
+                <span className="text-xs font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full font-mono">
                   {weak.length} Needs Upgrade
                 </span>
               </div>
@@ -266,22 +266,22 @@ const SkillGap = () => {
                       className="p-3.5 rounded-2xl bg-amber-50/50 border border-amber-200/60 flex flex-col gap-1 text-xs"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-bold text-amber-950">{s.name}</span>
-                        <span className="text-[10px] uppercase font-bold text-amber-700 bg-white px-2 py-0.5 rounded-full border border-amber-200 font-mono">
+                        <span className="font-bold text-amber-950 font-body">{s.name}</span>
+                        <span className="text-[10px] uppercase font-bold text-amber-800 bg-white px-2 py-0.5 rounded-full border border-amber-200 font-mono">
                           Current: {s.userLevel}
                         </span>
                       </div>
-                      <p className="text-[11px] text-amber-800 leading-relaxed font-body">{s.recommendation}</p>
+                      <p className="text-[11px] text-amber-900 leading-relaxed font-body">{s.recommendation}</p>
                     </div>
                   ))
                 ) : (
-                  <p className="text-xs text-slate-400 py-4 text-center">No weak skills identified.</p>
+                  <p className="text-xs text-slate-400 py-4 text-center font-body">No weak skills identified.</p>
                 )}
               </div>
             </div>
 
             {/* Missing Skills */}
-            <div className="p-6 rounded-3xl bg-white border border-[#e8e9f2] shadow-card space-y-4">
+            <div className="p-6 rounded-3xl bg-white border border-[#e9ebf2] shadow-card space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                 <div className="flex items-center gap-2">
                   <XCircle className="w-5 h-5 text-rose-500" />
@@ -300,16 +300,16 @@ const SkillGap = () => {
                       className="p-3.5 rounded-2xl bg-rose-50/50 border border-rose-200/60 flex flex-col gap-1 text-xs"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-bold text-rose-950">{s.name}</span>
+                        <span className="font-bold text-rose-950 font-body">{s.name}</span>
                         <span className="text-[10px] uppercase font-bold text-rose-700 bg-white px-2 py-0.5 rounded-full border border-rose-200 font-mono">
                           {s.importance} priority
                         </span>
                       </div>
-                      <p className="text-[11px] text-rose-800 leading-relaxed font-body">{s.recommendation}</p>
+                      <p className="text-[11px] text-rose-900 leading-relaxed font-body">{s.recommendation}</p>
                     </div>
                   ))
                 ) : (
-                  <p className="text-xs text-slate-400 py-4 text-center">Great job! No critical skills missing.</p>
+                  <p className="text-xs text-slate-400 py-4 text-center font-body">Great job! No critical skills missing.</p>
                 )}
               </div>
             </div>
