@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { authService } from '../services/api';
 import toast from 'react-hot-toast';
 import {
   User,
@@ -12,8 +13,15 @@ import {
   Save,
   ShieldCheck,
   CheckCircle,
-  Loader2
+  Loader2,
+  Lock,
+  Key,
+  Eye,
+  EyeOff,
+  ShieldAlert
 } from 'lucide-react';
+import PasswordStrengthIndicator from '../components/PasswordStrengthIndicator';
+import { checkPasswordStrength } from '../utils/passwordValidator';
 
 const ProfileSettings = () => {
   const { user, updateProfile } = useAuth();
@@ -30,8 +38,23 @@ const ProfileSettings = () => {
 
   const [saving, setSaving] = useState(false);
 
+  // Security & Password Form State
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+  });
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [changingPassword, setChangingPassword] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handlePasswordChange = (e) => {
+    setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -39,6 +62,43 @@ const ProfileSettings = () => {
     setSaving(true);
     await updateProfile(formData);
     setSaving(false);
+  };
+
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
+    if (!passwordData.currentPassword || !passwordData.newPassword) {
+      toast.error('Please enter your current and new password.');
+      return;
+    }
+
+    const strength = checkPasswordStrength(passwordData.newPassword);
+    if (!strength.isStrong) {
+      toast.error(`Please provide a strong password: ${strength.missingRequirements.join(', ')}.`);
+      return;
+    }
+
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      toast.error('New passwords do not match.');
+      return;
+    }
+
+    setChangingPassword(true);
+    try {
+      await authService.changePassword({
+        currentPassword: passwordData.currentPassword,
+        newPassword: passwordData.newPassword,
+      });
+      toast.success('Account password updated successfully!');
+      setPasswordData({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: '',
+      });
+    } catch (err) {
+      toast.error(err.response?.data?.error || 'Failed to update password.');
+    } finally {
+      setChangingPassword(false);
+    }
   };
 
   return (
@@ -236,6 +296,137 @@ const ProfileSettings = () => {
                 <>
                   <Save className="w-4 h-4" />
                   <span>Save Changes</span>
+                </>
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
+
+      {/* Account Security & Password Card */}
+      <div className="bg-white p-7 sm:p-9 rounded-3xl border border-[#e8e9f2] shadow-premium space-y-6">
+        <div className="flex items-center gap-4 pb-6 border-b border-slate-100">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 via-brand-500 to-cyan-500 text-white flex items-center justify-center shadow-glow shrink-0">
+            <Lock className="w-6 h-6" />
+          </div>
+          <div>
+            <h3 className="text-xl font-extrabold text-slate-900 font-sans">Account Security & Password</h3>
+            <p className="text-xs text-slate-500 mt-0.5 font-body">
+              Update your account password with enterprise-grade strong password requirements.
+            </p>
+          </div>
+        </div>
+
+        <form onSubmit={handlePasswordSubmit} className="space-y-5">
+          <div>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 font-mono">
+              Current Password *
+            </label>
+            <div className="relative">
+              <Key className="w-4 h-4 text-slate-400 absolute left-4 top-3.5" />
+              <input
+                type={showCurrentPassword ? 'text' : 'password'}
+                name="currentPassword"
+                value={passwordData.currentPassword}
+                onChange={handlePasswordChange}
+                placeholder="Enter current password"
+                className="w-full pl-11 pr-11 py-3 rounded-2xl border border-[#e8e9f2] text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-700 transition-colors focus:outline-none"
+                aria-label={showCurrentPassword ? 'Hide password' : 'Show password'}
+              >
+                {showCurrentPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 font-mono">
+                  New Password *
+                </label>
+                <span className="text-[10px] text-slate-400 font-mono">Min 8 chars, mixed case, symbols</span>
+              </div>
+              <div className="relative">
+                <Lock className="w-4 h-4 text-slate-400 absolute left-4 top-3.5" />
+                <input
+                  type={showNewPassword ? 'text' : 'password'}
+                  name="newPassword"
+                  value={passwordData.newPassword}
+                  onChange={handlePasswordChange}
+                  placeholder="Enter strong new password"
+                  className="w-full pl-11 pr-11 py-3 rounded-2xl border border-[#e8e9f2] text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowNewPassword(!showNewPassword)}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-700 transition-colors focus:outline-none"
+                  aria-label={showNewPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showNewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 font-mono">
+                Confirm New Password *
+              </label>
+              <div className="relative">
+                <Lock className="w-4 h-4 text-slate-400 absolute left-4 top-3.5" />
+                <input
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  name="confirmPassword"
+                  value={passwordData.confirmPassword}
+                  onChange={handlePasswordChange}
+                  placeholder="Re-enter new password"
+                  className="w-full pl-11 pr-11 py-3 rounded-2xl border border-[#e8e9f2] text-xs sm:text-sm font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-700 transition-colors focus:outline-none"
+                  aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Real-time Strength Indicator & Verification */}
+          <PasswordStrengthIndicator
+            password={passwordData.newPassword}
+            confirmPassword={passwordData.confirmPassword}
+          />
+
+          <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-xs text-slate-500 font-mono">
+              <ShieldCheck className="w-4 h-4 text-cyan-600" />
+              <span>Hashed with 12 bcrypt salt rounds before persistence</span>
+            </div>
+
+            <button
+              type="submit"
+              disabled={changingPassword}
+              className="inline-flex items-center gap-2 px-7 py-3 rounded-2xl font-bold text-xs text-white bg-gradient-to-r from-brand-600 via-brand-500 to-cyan-500 hover:shadow-glow hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
+            >
+              {changingPassword ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin text-white" />
+                  <span>Updating Password...</span>
+                </>
+              ) : (
+                <>
+                  <Key className="w-4 h-4" />
+                  <span>Update Password</span>
                 </>
               )}
             </button>

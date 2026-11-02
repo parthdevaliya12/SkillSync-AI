@@ -1,7 +1,21 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Compass, Mail, Lock, User, ArrowRight, Loader2, Sparkles, AlertCircle, ShieldCheck } from 'lucide-react';
+import {
+  Compass,
+  Mail,
+  Lock,
+  User,
+  ArrowRight,
+  Loader2,
+  Sparkles,
+  AlertCircle,
+  ShieldCheck,
+  Eye,
+  EyeOff
+} from 'lucide-react';
+import PasswordStrengthIndicator from '../components/PasswordStrengthIndicator';
+import { checkPasswordStrength } from '../utils/passwordValidator';
 
 const Register = () => {
   const { register } = useAuth();
@@ -13,6 +27,8 @@ const Register = () => {
     password: '',
     confirmPassword: '',
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -28,13 +44,14 @@ const Register = () => {
       return;
     }
 
-    if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters.');
+    const strength = checkPasswordStrength(formData.password);
+    if (!strength.isStrong) {
+      setError(`Please choose a strong password. Missing: ${strength.missingRequirements.join(', ')}.`);
       return;
     }
 
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match.');
+      setError('Passwords do not match. Please verify your confirmation password.');
       return;
     }
 
@@ -121,44 +138,69 @@ const Register = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 font-mono">
-                Password (Min 6 characters)
-              </label>
+              <div className="flex items-center justify-between mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 font-mono">
+                  Password *
+                </label>
+                <span className="text-[10px] text-slate-400 font-mono">Min 8 chars, mixed case, symbols</span>
+              </div>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
                   <Lock className="w-4 h-4" />
                 </div>
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="••••••••"
-                  className="w-full pl-11 pr-4 py-3 rounded-2xl border border-[#e8e9f2] focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-xs sm:text-sm font-medium transition-all"
+                  placeholder="Create a strong password"
+                  className="w-full pl-11 pr-11 py-3 rounded-2xl border border-[#e8e9f2] focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-xs sm:text-sm font-medium transition-all"
                   required
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-700 transition-colors focus:outline-none"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
               </div>
             </div>
 
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 font-mono">
-                Confirm Password
+                Confirm Password *
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
                   <Lock className="w-4 h-4" />
                 </div>
                 <input
-                  type="password"
+                  type={showConfirmPassword ? 'text' : 'password'}
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  placeholder="••••••••"
-                  className="w-full pl-11 pr-4 py-3 rounded-2xl border border-[#e8e9f2] focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-xs sm:text-sm font-medium transition-all"
+                  placeholder="Re-enter password"
+                  className="w-full pl-11 pr-11 py-3 rounded-2xl border border-[#e8e9f2] focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-xs sm:text-sm font-medium transition-all"
                   required
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-700 transition-colors focus:outline-none"
+                  aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
               </div>
             </div>
+
+            {/* Real-time Password Strength Indicator & Checklist */}
+            <PasswordStrengthIndicator
+              password={formData.password}
+              confirmPassword={formData.confirmPassword}
+            />
 
             <div className="pt-2">
               <button

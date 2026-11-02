@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { authService } from '../services/api';
-import { Compass, Mail, Lock, Key, ArrowRight, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Compass, Mail, Lock, Key, ArrowRight, Loader2, CheckCircle2, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import toast from 'react-hot-toast';
+import PasswordStrengthIndicator from '../components/PasswordStrengthIndicator';
+import { checkPasswordStrength } from '../utils/passwordValidator';
 
 const ForgotPassword = () => {
   const [step, setStep] = useState(1); // 1: Request token, 2: Reset password
   const [email, setEmail] = useState('');
   const [resetToken, setResetToken] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -44,8 +49,14 @@ const ForgotPassword = () => {
       return;
     }
 
-    if (newPassword.length < 6) {
-      setError('New password must be at least 6 characters.');
+    const strength = checkPasswordStrength(newPassword);
+    if (!strength.isStrong) {
+      setError(`Please provide a strong password. Missing: ${strength.missingRequirements.join(', ')}.`);
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setError('Passwords do not match. Please verify your confirmation password.');
       return;
     }
 
@@ -163,29 +174,79 @@ const ForgotPassword = () => {
               </div>
 
               <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 font-mono">
+                    New Password *
+                  </label>
+                  <span className="text-[10px] text-slate-400 font-mono">Min 8 chars, mixed case, symbols</span>
+                </div>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                    <Lock className="w-4 h-4" />
+                  </div>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    value={newPassword}
+                    onChange={(e) => {
+                      setNewPassword(e.target.value);
+                      setError('');
+                    }}
+                    placeholder="Enter new strong password"
+                    className="w-full pl-11 pr-11 py-3 rounded-2xl border border-[#e8e9f2] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all font-medium"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-700 transition-colors focus:outline-none"
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 font-mono">
-                  New Password (Min 6 characters)
+                  Confirm New Password *
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
                     <Lock className="w-4 h-4" />
                   </div>
                   <input
-                    type="password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    placeholder="••••••••"
-                    className="w-full pl-11 pr-4 py-3 rounded-2xl border border-[#e8e9f2] text-xs sm:text-sm focus:ring-2 focus:ring-brand-500"
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    value={confirmPassword}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      setError('');
+                    }}
+                    placeholder="Re-enter new password"
+                    className="w-full pl-11 pr-11 py-3 rounded-2xl border border-[#e8e9f2] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all font-medium"
                     required
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-700 transition-colors focus:outline-none"
+                    aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                  >
+                    {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
                 </div>
               </div>
+
+              {/* Real-time Password Strength Indicator & Requirements */}
+              <PasswordStrengthIndicator
+                password={newPassword}
+                confirmPassword={confirmPassword}
+              />
 
               <div className="pt-2">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl text-sm font-bold text-white bg-gradient-to-r from-brand-600 via-brand-500 to-cyan-500 hover:shadow-glow transition-all disabled:opacity-50"
+                  className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl text-sm font-bold text-white bg-gradient-to-r from-brand-600 via-brand-500 to-cyan-500 hover:shadow-glow hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50"
                 >
                   {loading ? (
                     <>
